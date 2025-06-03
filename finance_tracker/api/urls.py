@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import homeAPI, TransactionList
+from .views import homeAPI, TransactionList, TransactionDetail
 
 urlpatterns = [
     path('', homeAPI),
