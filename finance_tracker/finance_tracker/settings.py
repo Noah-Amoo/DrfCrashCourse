@@ -51,7 +51,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
         'rest_framework.permissions.IsAdminUser',
         'rest_framework.permissions.AllowAny',
-        'rest_framework.permissions.DjangoModelPermissions',
+        #'rest_framework.permissions.DjangoModelPermissions',
     ]
 }
 
