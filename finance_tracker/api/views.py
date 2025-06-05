@@ -12,7 +12,7 @@ def homeAPI(request):
     return HttpResponse("Home of the API")
 
 
-class TransactionList(APIView):
+#class TransactionList(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request):
         transactions = Transaction.objects.all()
@@ -27,7 +27,7 @@ class TransactionList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
-class TransactionDetail(APIView):
+#class TransactionDetail(APIView):
     #permission_classes = [IsOwnerOrAdmin]
     def get(self, request, pk):
         try:
