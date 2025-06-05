@@ -4,6 +4,7 @@ from rest_framework import status
 from .models import Transaction
 from .serializers import TransactionSerializer
 from django.http import HttpResponse
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 # Create your views here.
 def homeAPI(request):
@@ -11,6 +12,7 @@ def homeAPI(request):
 
 
 class TransactionList(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request):
         transactions = Transaction.objects.all()
         serializer = TransactionSerializer(transactions, many=True)
