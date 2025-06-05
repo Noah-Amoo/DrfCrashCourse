@@ -5,6 +5,7 @@ from .models import Transaction
 from .serializers import TransactionSerializer
 from django.http import HttpResponse
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from .permissions import IsOwnerOrAdmin
 
 # Create your views here.
 def homeAPI(request):
@@ -27,6 +28,7 @@ class TransactionList(APIView):
     
 
 class TransactionDetail(APIView):
+    #permission_classes = [IsOwnerOrAdmin]
     def get(self, request, pk):
         try:
             transaction = Transaction.objects.get(pk=pk)
