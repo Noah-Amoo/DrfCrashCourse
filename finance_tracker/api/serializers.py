@@ -4,7 +4,7 @@ from .models import Transaction
 class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
-        fields = ['id', 'amount', 'transaction_type', 'date', 'description']
+        fields = ['url','id', 'amount', 'transaction_type', 'date', 'description']
 
     # DRF follows the validate_<fieldname> to check for which field to validate, in this case, amount.
     def validate_amount(self, value):
