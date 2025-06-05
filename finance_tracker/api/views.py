@@ -6,6 +6,7 @@ from .serializers import TransactionSerializer
 from django.http import HttpResponse
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from .permissions import IsOwnerOrAdmin
+from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView
 
 # Create your views here.
 def homeAPI(request):
@@ -28,6 +29,7 @@ def homeAPI(request):
     
 
 #class TransactionDetail(APIView):
+
     #permission_classes = [IsOwnerOrAdmin]
     def get(self, request, pk):
         try:
@@ -37,3 +39,13 @@ def homeAPI(request):
         
         serializer = TransactionSerializer(transaction, context={'request': request})
         return Response(serializer.data)
+
+
+class TransactionList(ListCreateAPIView):
+    """
+    Handles listing all transactions and creating new ones.
+    """
+
+    querryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
