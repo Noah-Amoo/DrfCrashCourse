@@ -46,6 +46,15 @@ class TransactionList(ListCreateAPIView):
     Handles listing all transactions and creating new ones.
     """
 
-    querryset = Transaction.objects.all()
+    queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+class TransactionDetail(RetrieveDestroyAPIView):
+    """
+    Handles retrieving or deleting a specific transaction
+    """
+
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer
