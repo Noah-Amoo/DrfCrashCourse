@@ -16,11 +16,11 @@ class TransactionList(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request):
         transactions = Transaction.objects.all()
-        serializer = TransactionSerializer(transactions, many=True)
+        serializer = TransactionSerializer(transactions, many=True, context={'request': request})
         return Response(serializer.data)
     
     def post(self, request):
-        serializer = TransactionSerializer(data=request.data)
+        serializer = TransactionSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -35,5 +35,5 @@ class TransactionDetail(APIView):
         except Transaction.DoesNotExist:
             return Response({'error': 'Transaction was not found'}, status=status.HTTP_404_NOT_FOUND)
         
-        serializer = TransactionSerializer(transaction)
+        serializer = TransactionSerializer(transaction, context={'request': request})
         return Response(serializer.data)
